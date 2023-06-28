@@ -1,1 +1,29 @@
-/* You can add global styles to this file, and also import other style files */
+@import url("./reset.css");
+@import url("./layout.css");
+@import url("./typography.css");
+@import url("./responsive.css");
+
+body {
+  max-width: 1366px;
+  margin: auto;
+  position: relative;
+  min-height: 100vh;
+}
+
+h2 {
+  text-align: center;
+  border-bottom: 1px dashed #999;
+}
+
+span {
+  font-weight: bold;
+}
+
+button {
+  background-color: #4ebced;
+  color: white;
+}
+
+button:hover {
+  cursor: pointer;
+}
