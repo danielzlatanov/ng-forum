@@ -9,6 +9,7 @@ import { IPost } from '../interfaces/post';
 })
 export class RecentPostListComponent {
   postList: IPost[] | null = null;
+  errorFetchingData: boolean = false;
 
   constructor(private apiService: ApiService) {}
 
@@ -18,6 +19,7 @@ export class RecentPostListComponent {
         this.postList = val;
       },
       error: (err) => {
+        this.errorFetchingData = true;
         console.error(err);
       },
     });

@@ -1,3 +1,6 @@
+<div *ngIf="errorFetchingData">Error loading posts</div>
+<app-loader *ngIf="!postList"></app-loader>
+
 <aside>
   <div class="aside">
     <h2 class="title">Recent posts</h2>
