@@ -10,8 +10,13 @@ export class RecentPostListComponent {
   constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
-    this.apiService.getPosts(5).subscribe((val) => {
-      console.log(val);
+    this.apiService.getPosts(5).subscribe({
+      next: (val) => {
+        console.log(val);
+      },
+      error: (err) => {
+        console.error(err);
+      },
     });
   }
 }
