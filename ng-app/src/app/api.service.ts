@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ITheme } from './interfaces/theme';
-import { IPost } from './interfaces/post';
+import { ITheme } from './shared/interfaces';
+import { IPost } from './shared/interfaces';
 
 const apiUrl = 'http://localhost:3000/api';
 

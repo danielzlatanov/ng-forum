@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
-import { ITheme } from '../interfaces/theme';
+import { ITheme } from '../shared/interfaces';
 
 @Component({
   selector: 'app-theme-list',
@@ -8,7 +8,6 @@ import { ITheme } from '../interfaces/theme';
   styleUrls: ['./theme-list.component.scss'],
 })
 export class ThemeListComponent implements OnInit {
-
   themeList: ITheme[] | null = null;
   errorFetchingData: boolean = false;
 

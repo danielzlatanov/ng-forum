@@ -3,16 +3,13 @@ import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  selector: 'app-logout',
+  templateUrl: './logout.component.html',
+  styleUrls: ['./logout.component.scss'],
 })
-export class LoginComponent {
+export class LogoutComponent {
   constructor(private router: Router, private authService: AuthService) {
-    //! mock user
-    (this.authService.user as any) = {
-      username: 'Daniel',
-    };
+    this.authService.user = null;
     this.router.navigate(['/']);
   }
 }
