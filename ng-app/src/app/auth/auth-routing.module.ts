@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { LogoutComponent } from './logout/logout.component';
 import { ProfileComponent } from './profile/profile.component';
+import { authGuard } from '../shared/guards/auth.activate';
 
 const routes: Routes = [
   {
@@ -13,7 +14,7 @@ const routes: Routes = [
         path: 'login',
         component: LoginComponent,
         data: { 
-          title: 'Login Form'
+          title: 'Login Form',
         }
       },
       {
@@ -26,15 +27,19 @@ const routes: Routes = [
       {
         path: 'logout',
         component: LogoutComponent,
+        canActivate: [authGuard],
         data: { 
-          title: 'Logging Out'
+          title: 'Logging Out',
+          loginRequired: true
         }
       },
       {
         path: 'profile',
         component: ProfileComponent,
+        canActivate: [authGuard],
         data: { 
-          title: 'Your Profile'
+          title: 'Your Profile',
+          loginRequired: true
         }
       },
     ],
