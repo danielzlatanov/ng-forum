@@ -15,7 +15,7 @@
 
       <ul *ngIf="isLoggedIn">
         <li>
-          <a routerLink="/auth/profile">'s profile</a>
+          <a routerLink="/auth/profile">{{user?.username}}'s profile</a>
         </li>
         <li>
           <a routerLink="/auth/logout">Logout</a>
