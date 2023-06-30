@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { ThemeListComponent } from './theme-list/theme-list.component';
 import { ThemeRoutingModule } from './theme-routing.module';
 import { SharedModule } from "../shared/shared.module";
+import { NewThemeComponent } from './new-theme/new-theme.component';
 
 @NgModule({
-    declarations: [ThemeListComponent],
+    declarations: [ThemeListComponent, NewThemeComponent],
     exports: [ThemeListComponent],
     imports: [CommonModule, ThemeRoutingModule, SharedModule]
 })
