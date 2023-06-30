@@ -10,9 +10,9 @@ import { AuthService } from '../auth.service';
 export class LoginComponent {
   constructor(private router: Router, private authService: AuthService) {
     //! mock user
-    // (this.authService.user as any) = {
-    //   username: 'Daniel',
-    // };
-    // this.router.navigate(['/']);
+    (this.authService.user as any) = {
+      username: 'Daniel',
+    };
+    this.router.navigate(['/auth/profile']);
   }
 }
