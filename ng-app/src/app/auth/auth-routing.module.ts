@@ -12,18 +12,30 @@ const routes: Routes = [
       {
         path: 'login',
         component: LoginComponent,
+        data: { 
+          title: 'Login Form'
+        }
       },
       {
         path: 'register',
         component: RegisterComponent,
+        data: { 
+          title: 'Register Form'
+        }
       },
       {
         path: 'logout',
         component: LogoutComponent,
+        data: { 
+          title: 'Logging Out'
+        }
       },
       {
         path: 'profile',
         component: ProfileComponent,
+        data: { 
+          title: 'Your Profile'
+        }
       },
     ],
   },

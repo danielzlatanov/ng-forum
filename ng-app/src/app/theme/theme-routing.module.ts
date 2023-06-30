@@ -10,15 +10,24 @@ const routes: Routes = [
     children: [
       // {
       //   path: 'list',
-      //   component: ThemeListComponent
+      //   component: ThemeListComponent,
+      //   data: {
+      //     title: 'Theme List',
+      //   },
       // },
       {
         path: 'new',
-        component: NewThemeComponent
+        component: NewThemeComponent,
+        data: {
+          title: 'Add New Theme',
+        },
       },
       {
         path: 'content/:id',
-        component: ThemeContentComponent
+        component: ThemeContentComponent,
+        data: {
+          title: 'Theme Content',
+        },
       },
     ],
   },
