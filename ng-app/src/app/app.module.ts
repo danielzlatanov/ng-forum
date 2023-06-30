@@ -9,10 +9,23 @@ import { RecentPostListComponent } from './recent-post-list/recent-post-list.com
 import { HttpClientModule } from '@angular/common/http';
 import { MainComponent } from './main/main.component';
 import { SharedModule } from './shared/shared.module';
+import { AuthRoutingModule } from './auth/auth-routing.module';
 
 @NgModule({
-  declarations: [AppComponent, ThemeListComponent, RecentPostListComponent, MainComponent],
-  imports: [BrowserModule, CoreModule, AppRoutingModule, HttpClientModule, SharedModule],
+  declarations: [
+    AppComponent,
+    ThemeListComponent,
+    RecentPostListComponent,
+    MainComponent,
+  ],
+  imports: [
+    AuthRoutingModule,
+    AppRoutingModule,
+    BrowserModule,
+    CoreModule,
+    HttpClientModule,
+    SharedModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
