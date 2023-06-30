@@ -13,6 +13,6 @@ export class LoginComponent {
     (this.authService.user as any) = {
       username: 'Daniel',
     };
-    this.router.navigate(['/auth/profile']);
+    this.router.navigate(['/']);
   }
 }
