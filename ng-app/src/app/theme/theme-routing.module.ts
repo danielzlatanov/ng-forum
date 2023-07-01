@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NewThemeComponent } from './new-theme/new-theme.component';
 import { ThemeContentComponent } from './theme-content/theme-content.component';
 import { MainComponent } from './main/main.component';
+import { authGuard } from '../shared/guards/auth.activate';
 
 const routes: Routes = [
   {
@@ -18,8 +19,10 @@ const routes: Routes = [
       {
         path: 'new',
         component: NewThemeComponent,
+        canActivate: [authGuard],
         data: {
           title: 'Add New Theme',
+          loginRequired: true,
         },
       },
       {
