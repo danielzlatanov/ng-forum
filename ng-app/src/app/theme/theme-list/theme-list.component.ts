@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../api.service';
 import { ITheme } from '../../shared/interfaces';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-theme-list',
@@ -11,7 +12,11 @@ export class ThemeListComponent implements OnInit {
   themeList: ITheme[] | null = null;
   errorFetchingData: boolean = false;
 
-  constructor(private apiService: ApiService) {}
+  get isLoggedIn() {
+    return this.authService.isLoggedIn;
+  }
+
+  constructor(private apiService: ApiService, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.apiService.getThemes().subscribe({
