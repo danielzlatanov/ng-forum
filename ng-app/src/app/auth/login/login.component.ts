@@ -14,6 +14,6 @@ export class LoginComponent {
       username: 'Daniel',
       _id: '5fa64b162183ce1728ff371dmyMockId'
     };
-    this.router.navigate(['/theme/list']);
+    this.router.navigate(['/theme/content/1']);
   }
 }

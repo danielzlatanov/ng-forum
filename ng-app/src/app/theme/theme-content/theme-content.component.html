@@ -22,7 +22,7 @@
     </header>
     <div class="comment-main">
       <div class="userdetails">
-        <img src="./profile.png" alt="avatar" />
+        <img src="/assets/profile.png" alt="avatar" />
       </div>
       <div class="post-content">
         <p>
@@ -39,9 +39,9 @@
         </p>
       </div>
     </div>
-    <div class="footer">
-      <!-- <i class="fas fa-thumbs-up"></i>
-          <i class="fas fa-thumbs-down"></i> -->
+    <div class="footer" *ngIf="isLoggedIn">
+      <i class="fas fa-thumbs-up"></i>
+          <i class="fas fa-thumbs-down"></i>
       <p><span>5</span> likes</p>
     </div>
   </div>
@@ -51,15 +51,15 @@
     </header>
     <div class="comment-main">
       <div class="userdetails">
-        <img src="./profile.png" alt="avatar" />
+        <img src="/assets/profile.png" alt="avatar" />
       </div>
       <div class="post-content">
         <p>Lorem ipsum dolor sit amet consectetur</p>
       </div>
     </div>
-    <div class="footer">
-      <!-- <i class="fas fa-thumbs-up"></i>
-          <i class="fas fa-thumbs-down"></i> -->
+    <div class="footer" *ngIf="isLoggedIn">
+      <i class="fas fa-thumbs-up"></i>
+          <i class="fas fa-thumbs-down"></i>
       <p><span>3</span> likes</p>
     </div>
   </div>
