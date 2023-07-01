@@ -12,11 +12,14 @@ export class ThemeListComponent implements OnInit {
   themeList: ITheme[] | null = null;
   errorFetchingData: boolean = false;
 
-  get isLoggedIn() {
-    return this.authService.isLoggedIn;
+  get user() {
+    return this.authService.user;
   }
 
-  constructor(private apiService: ApiService, private authService: AuthService) {}
+  constructor(
+    private apiService: ApiService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.apiService.getThemes().subscribe({
@@ -28,5 +31,19 @@ export class ThemeListComponent implements OnInit {
         console.error(err);
       },
     });
+  }
+
+  subscribeHandler(e: MouseEvent) {
+    const themeId = (
+      (e.target as HTMLButtonElement).parentNode as HTMLDivElement
+    ).id;
+    const themeToSubscribe = this.themeList?.find((x) => x._id == themeId);
+
+    if ((e.target as HTMLButtonElement).textContent == ' Subscribe ') {
+      themeToSubscribe?.subscribers.push(this.user?._id as any);
+      (e.target as HTMLButtonElement).textContent = 'Unsubscribe';
+      (e.target as HTMLButtonElement).classList.remove('subscribe');
+      (e.target as HTMLButtonElement).classList.add('unsubscribe');
+    }
   }
 }

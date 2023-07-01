@@ -18,8 +18,14 @@
             </p>
           </div>
         </div>
-        <div class="subscribers">
-        <button class="subscribe" *ngIf="isLoggedIn">Subscribe</button>
+        <div class="subscribers" data-id="{{ theme._id }}">
+          <button
+            class="subscribe"
+            (click)="subscribeHandler($event)"
+            *ngIf="user"
+          >
+            Subscribe
+          </button>
           <p>
             Subscribers: <span>{{ theme.subscribers.length }}</span>
           </p>

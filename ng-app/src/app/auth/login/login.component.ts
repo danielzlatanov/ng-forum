@@ -12,7 +12,8 @@ export class LoginComponent {
     //! mock user
     (this.authService.user as any) = {
       username: 'Daniel',
+      _id: '5fa64b162183ce1728ff371dmyMockId'
     };
-    this.router.navigate(['/']);
+    this.router.navigate(['/theme/list']);
   }
 }
