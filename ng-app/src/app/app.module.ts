@@ -6,15 +6,15 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
-import { AuthRoutingModule } from './auth/auth-routing.module';
 import { ThemeModule } from './theme/theme.module';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [AppComponent],
   providers: [],
   bootstrap: [AppComponent],
   imports: [
-    AuthRoutingModule,
+    AuthModule,
     ThemeModule,
     AppRoutingModule,
     BrowserModule,
