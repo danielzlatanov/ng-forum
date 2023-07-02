@@ -13,6 +13,10 @@ export class RegisterComponent {
   constructor() {}
 
   registerHandler(form: NgForm) {
-    console.log('handling register request');
+    if (form.invalid) {
+      return;
+    }
+    
+    console.log(form.value);
   }
 }

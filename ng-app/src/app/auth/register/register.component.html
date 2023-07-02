@@ -64,15 +64,22 @@
       <label for="tel"
         ><span><i class="fas fa-phone"></i></span
       ></label>
-      <select name="select-tel" id="select-tel" class="tel">
+      <select
+        name="ext"
+        id="select-tel"
+        class="tel"
+        ngModel
+        #extInput="ngModel"
+      >
         <option value="00359">+359</option>
       </select>
       <input
         type="text"
-        name="tel"
+        name="phone"
         id="tel"
         placeholder="885 888 888"
         ngModel
+        #phoneInput="ngModel"
       />
     </p>
 
@@ -104,13 +111,13 @@
 
     <!-- rePassword -->
     <p class="field field-icon">
-      <label for="rePassword"
+      <label for="repass"
         ><span><i class="fas fa-lock"></i></span
       ></label>
       <input
         type="password"
-        name="rePassword"
-        id="rePassword"
+        name="repass"
+        id="repass"
         placeholder="******"
         #repassInput="ngModel"
         ngModel
