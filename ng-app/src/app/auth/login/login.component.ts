@@ -1,3 +1,4 @@
+import { emailPattern } from './../../shared/constants';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
@@ -9,6 +10,8 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
+  pattern = emailPattern;
+
   constructor(private router: Router, private authService: AuthService) {}
 
   loginHandler(form: NgForm) {

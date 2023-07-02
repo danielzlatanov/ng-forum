@@ -1,4 +1,8 @@
-<form class="register" action="" method="post">
+<form
+  #registerForm="ngForm"
+  class="register"
+  (ngSubmit)="registerHandler(registerForm)"
+>
   <fieldset>
     <h2>Registration Form</h2>
 
@@ -13,9 +17,21 @@
         name="username"
         id="username"
         placeholder="Johny"
+        #usernameInput="ngModel"
+        ngModel
+        required
+        minlength="5"
       />
     </p>
-    <p class="error">Username is required!</p>
+
+    <ng-container *ngIf="usernameInput.touched || usernameInput.dirty">
+      <p class="error" *ngIf="usernameInput.errors?.['required']">
+        Username is required!
+      </p>
+      <p class="error" *ngIf="usernameInput.errors?.['minlength']">
+        Username must be at least 5 characters!
+      </p>
+    </ng-container>
 
     <!-- email -->
     <p class="field field-icon">
@@ -27,14 +43,21 @@
         name="email"
         id="email"
         placeholder="john.doe@gmail.com"
+        #emailInput="ngModel"
+        ngModel
+        required
+        [pattern]="pattern"
       />
     </p>
-    <!-- <p class="error">
-          Email is required!
+
+    <ng-container *ngIf="emailInput.touched || emailInput.dirty">
+      <p class="error" *ngIf="emailInput.errors?.['required']">
+        Email is required!
       </p>
-      <p class="error">
-          Email is not valid!
-      </p> -->
+      <p class="error" *ngIf="emailInput.errors?.['pattern']">
+        Email is not valid!
+      </p>
+    </ng-container>
 
     <!-- telephone -->
     <p class="field field-icon">
@@ -44,7 +67,13 @@
       <select name="select-tel" id="select-tel" class="tel">
         <option value="00359">+359</option>
       </select>
-      <input type="text" name="tel" id="tel" placeholder="885 888 888" />
+      <input
+        type="text"
+        name="tel"
+        id="tel"
+        placeholder="885 888 888"
+        ngModel
+      />
     </p>
 
     <!-- password -->
@@ -57,14 +86,21 @@
         name="password"
         id="password"
         placeholder="******"
+        #passInput="ngModel"
+        ngModel
+        required
+        minlength="5"
       />
     </p>
-    <!-- <p class="error">
-          Password is required!
+
+    <ng-container *ngIf="passInput.touched || passInput.dirty">
+      <p class="error" *ngIf="passInput.errors?.['required']">
+        Password is required!
       </p>
-      <p class="error">
-          Password must be at least 4 characters!
-      </p> -->
+      <p class="error" *ngIf="passInput.errors?.['minlength']">
+        Password must be at least 5 characters!
+      </p>
+    </ng-container>
 
     <!-- rePassword -->
     <p class="field field-icon">
@@ -76,11 +112,21 @@
         name="rePassword"
         id="rePassword"
         placeholder="******"
+        #repassInput="ngModel"
+        ngModel
+        required
+        minlength="5"
+        [compareWith]="passInput"
       />
     </p>
-    <!-- <p class="error">Repeat Password does not match password!</p> -->
 
-    <button disabled>Create Account</button>
+    <ng-container *ngIf="repassInput.touched || repassInput.dirty">
+      <p class="error" *ngIf="repassInput.errors?.['passDontMatch']">
+        Repeat Password does not match password!
+      </p>
+    </ng-container>
+
+    <button [disabled]="registerForm.invalid">Create Account</button>
 
     <p class="text-center">
       Have an account?
