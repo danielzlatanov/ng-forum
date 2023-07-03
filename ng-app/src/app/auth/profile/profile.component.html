@@ -1,16 +1,79 @@
-<div class="profile"><img src="/assets/profile.png" alt="default user">
+<div class="profile">
+  <img src="/assets/profile.png" alt="default user" />
   <h3>User Info:</h3>
-  <div class="flex">
-      <p>Username: </p>
-      <p>Johny</p>
-  </div>
-  <div class="flex">
-      <p>Email: </p>
-      <p>john.doe@gmail.com</p>
-  </div>
-  <div class="flex">
-      <p>Phone: </p>
-      <p>+359 885 888 888</p>
-  </div>
-  <button class="edit-button">Edit</button>
+
+  <form #profileForm="ngForm" (ngSubmit)="saveProfile(profileForm)">
+    <div class="flex">
+      <p>Username:</p>
+
+      <ng-container *ngIf="editMode">
+        <input
+          type="text"
+          ngModel="{{ user.username }}"
+          name="username"
+          id="username"
+          #usernameInput="ngModel"
+          required
+        />
+      </ng-container>
+
+      <ng-container *ngIf="!editMode">
+        <p>{{ user.username }}</p>
+      </ng-container>
+    </div>
+    <div class="flex">
+      <p>Email:</p>
+
+      <ng-container *ngIf="editMode">
+        <input
+          type="email"
+          ngModel="{{ user.email }}"
+          name="email"
+          id="email"
+          #usernameInput="ngModel"
+          required
+        />
+      </ng-container>
+
+      <ng-container *ngIf="!editMode">
+        <p>{{ user.email }}</p>
+      </ng-container>
+    </div>
+    <div class="flex">
+      <p>Phone:</p>
+
+      <ng-container *ngIf="editMode">
+        <div>
+          <select
+            name="select-tel"
+            id="select-tel"
+            class="tel"
+            ngModel="{{ user.ext }}"
+          >
+            <option value="00359">+359</option>
+          </select>
+          <input
+            type="text"
+            name="tel"
+            id="tel"
+            ngModel="{{ user.tel }}"
+            value="885 888 888"
+          />
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="!editMode">
+        <p>{{ user.ext }} {{ user.tel }}</p>
+      </ng-container>
+    </div>
+
+    <ng-container *ngIf="!editMode">
+      <button class="edit-button" (click)="toggleEditMode()">Edit</button>
+    </ng-container>
+
+    <ng-container *ngIf="editMode">
+      <button class="red-button">Cancel</button>
+      <button class="green-button">Save</button>
+    </ng-container>
+  </form>
 </div>
