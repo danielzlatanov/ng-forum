@@ -7,7 +7,6 @@
         ><span><i class="fas fa-envelope"></i></span
       ></label>
       <input
-        class="input-error"
         type="email"
         name="email"
         id="email"
@@ -16,6 +15,10 @@
         ngModel
         required
         [pattern]="pattern"
+        [ngClass]="{
+          'input-error':
+            emailInput.invalid && (emailInput.touched || emailInput.dirty)
+        }"
       />
     </p>
 
@@ -41,6 +44,10 @@
         ngModel
         required
         minlength="5"
+        [ngClass]="{
+          'input-error':
+            passInput.invalid && (passInput.touched || passInput.dirty)
+        }"
       />
     </p>
     <ng-container *ngIf="passInput.touched || passInput.dirty">

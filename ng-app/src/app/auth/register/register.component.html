@@ -21,6 +21,11 @@
         ngModel
         required
         minlength="5"
+        [ngClass]="{
+          'input-error':
+            usernameInput.invalid &&
+            (usernameInput.touched || usernameInput.dirty)
+        }"
       />
     </p>
 
@@ -48,6 +53,10 @@
         ngModel
         required
         [pattern]="pattern"
+        [ngClass]="{
+          'input-error':
+            emailInput.invalid && (emailInput.touched || emailInput.dirty)
+        }"
       />
     </p>
 
@@ -98,6 +107,10 @@
         ngModel
         required
         minlength="5"
+        [ngClass]="{
+          'input-error':
+            passInput.invalid && (passInput.touched || passInput.dirty)
+        }"
       />
     </p>
 
@@ -126,6 +139,10 @@
         required
         minlength="5"
         [compareWith]="passInput"
+        [ngClass]="{
+          'input-error':
+            repassInput.invalid && (repassInput.touched || repassInput.dirty)
+        }"
       />
     </p>
 

@@ -13,6 +13,10 @@
         ngModel
         required
         minlength="5"
+        [ngClass]="{
+          'input-error':
+            titleInput.invalid && (titleInput.touched || titleInput.dirty)
+        }"
       />
 
       <ng-container *ngIf="titleInput.touched || titleInput.dirty">
@@ -38,6 +42,10 @@
         ngModel
         required
         minlength="10"
+        [ngClass]="{
+          'input-error':
+            textInput.invalid && (textInput.touched || textInput.dirty)
+        }"
       ></textarea>
 
       <ng-container *ngIf="textInput.touched || textInput.dirty">
