@@ -20,7 +20,9 @@
           Theme name is required.
         </p>
         <p class="error" *ngIf="titleInput.errors?.['minlength']">
-          Theme name must be at least {{titleInput.errors?.['minlength']['requiredLength']}} characters long.
+          Theme name must be at least
+          {{titleInput.errors?.['minlength']['requiredLength']}} characters
+          long.
         </p>
       </ng-container>
     </div>
@@ -43,7 +45,8 @@
           The field with your post is required.
         </p>
         <p class="error" *ngIf="textInput.errors?.['minlength']">
-          Post must be at least {{textInput.errors?.['minlength']['requiredLength']}} characters long.
+          Post must be at least
+          {{textInput.errors?.['minlength']['requiredLength']}} characters long.
         </p>
       </ng-container>
     </div>

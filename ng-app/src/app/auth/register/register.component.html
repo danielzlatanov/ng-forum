@@ -29,7 +29,8 @@
         Username is required!
       </p>
       <p class="error" *ngIf="usernameInput.errors?.['minlength']">
-        Username must be at least 5 characters!
+        Username must be at least
+        {{usernameInput.errors?.['minlength']['requiredLength']}} characters!
       </p>
     </ng-container>
 
@@ -105,7 +106,8 @@
         Password is required!
       </p>
       <p class="error" *ngIf="passInput.errors?.['minlength']">
-        Password must be at least 5 characters!
+        Password must be at least
+        {{passInput.errors?.['minlength']['requiredLength']}} characters!
       </p>
     </ng-container>
 

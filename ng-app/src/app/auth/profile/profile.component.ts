@@ -34,6 +34,17 @@ export class ProfileComponent {
       return;
     }
 
-    console.log(form.value);
+    const { username, email, ext, phone } = form.value;
+    this.authService.user = {
+      username,
+      email,
+      tel: ext + ':' + phone,
+    } as any;
+
+    this.editMode = false;
+  }
+
+  cancelHandler() {
+    this.editMode = false;
   }
 }

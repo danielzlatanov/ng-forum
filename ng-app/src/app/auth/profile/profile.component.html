@@ -14,7 +14,19 @@
           id="username"
           #usernameInput="ngModel"
           required
+          minlength="5"
         />
+
+        <ng-container *ngIf="usernameInput.touched || usernameInput.dirty">
+          <p class="error" *ngIf="usernameInput.errors?.['required']">
+            Username is required!
+          </p>
+          <p class="error" *ngIf="usernameInput.errors?.['minlength']">
+            Username must be at least
+            {{usernameInput.errors?.['minlength']['requiredLength']}}
+            characters!
+          </p>
+        </ng-container>
       </ng-container>
 
       <ng-container *ngIf="!editMode">
@@ -30,9 +42,19 @@
           ngModel="{{ user.email }}"
           name="email"
           id="email"
-          #usernameInput="ngModel"
+          #emailInput="ngModel"
           required
+          [pattern]="pattern"
         />
+
+        <ng-container *ngIf="emailInput.touched || emailInput.dirty">
+          <p class="error" *ngIf="emailInput.errors?.['required']">
+            Email is required!
+          </p>
+          <p class="error" *ngIf="emailInput.errors?.['pattern']">
+            Email is not valid!
+          </p>
+        </ng-container>
       </ng-container>
 
       <ng-container *ngIf="!editMode">
@@ -45,19 +67,22 @@
       <ng-container *ngIf="editMode">
         <div>
           <select
-            name="select-tel"
+            name="ext"
             id="select-tel"
             class="tel"
             ngModel="{{ user.ext }}"
+            #extInput="ngModel"
           >
             <option value="00359">+359</option>
+            <option value="0044">+44</option>
+            <option value="0047">+47</option>
           </select>
           <input
             type="text"
-            name="tel"
+            name="phone"
             id="tel"
             ngModel="{{ user.tel }}"
-            value="885 888 888"
+            #phoneInput="ngModel"
           />
         </div>
       </ng-container>
@@ -72,8 +97,10 @@
     </ng-container>
 
     <ng-container *ngIf="editMode">
-      <button class="red-button">Cancel</button>
-      <button class="green-button">Save</button>
+      <button class="red-button" (click)="cancelHandler()">Cancel</button>
+      <button class="green-button" [disabled]="profileForm.invalid">
+        Save
+      </button>
     </ng-container>
   </form>
 </div>
