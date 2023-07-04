@@ -40,4 +40,8 @@ export class AuthService {
     };
     return this.http.post(`${apiUrl}/login`, body);
   }
+
+  getProfile() {
+    return this.http.get<IUser>(`${apiUrl}/users/profile`);
+  }
 }

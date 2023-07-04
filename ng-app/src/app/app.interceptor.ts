@@ -16,6 +16,10 @@ export class AppInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
+    if (request.url.includes('/api')) {
+      request = request.clone({ withCredentials: true });
+    }
+
     return next.handle(request);
   }
 }
