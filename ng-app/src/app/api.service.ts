@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ITheme } from './shared/interfaces';
 import { IPost } from './shared/interfaces';
 
-const apiUrl = 'http://localhost:3000/api';
+export const apiUrl = 'http://localhost:3000/api';
 
 @Injectable({
   providedIn: 'root',

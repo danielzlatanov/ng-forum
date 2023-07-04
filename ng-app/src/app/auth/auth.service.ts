@@ -1,15 +1,35 @@
+import { apiUrl } from './../api.service';
 import { Injectable } from '@angular/core';
 import { IUser } from '../shared/interfaces';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  user: IUser | null = { username: 'Daniel', email: 'daniel@gmail.com', tel: '00359:0000000'} as any;
+  apiUrl = apiUrl;
+  user: IUser | null = null;
 
   get isLoggedIn() {
     return this.user !== null;
   }
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
+
+  register(
+    username: string,
+    email: string,
+    password: string,
+    rePassword: string,
+    tel?: string
+  ) {
+    const body = {
+      username,
+      email,
+      password,
+      rePassword,
+      tel,
+    };
+    return this.http.post(`${apiUrl}/register`, body);
+  }
 }
