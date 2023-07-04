@@ -24,11 +24,9 @@ export class LoginComponent {
     this.authService.login(email, password).subscribe({
 
       next: (user) => {
-        this.authService.user = user as IUser;
         this.router.navigate(['/theme/list']);
       },
       error: (err) => {
-        this.authService.user = null;
         console.error(err);
       },
     });

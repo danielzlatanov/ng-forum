@@ -20,7 +20,6 @@ export class LogoutComponent {
   }
 
   setUserAndNavigate() {
-    this.authService.user = null;
     this.router.navigate(['/']);
   }
 }

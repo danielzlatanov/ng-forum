@@ -33,11 +33,9 @@ export class RegisterComponent {
       .register(username, email, password, rePassword, tel || undefined)
       .subscribe({
         next: (user) => {
-          this.authService.user = user as IUser;
           this.router.navigate(['/theme/list']);
         },
         error: (err) => {
-          this.authService.user = null;
           console.error(err);
         },
       });

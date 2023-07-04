@@ -1,20 +1,29 @@
 import { apiUrl } from './../api.service';
-import { Injectable } from '@angular/core';
-import { IUser } from '../shared/interfaces';
+import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Subscription, filter, tap } from 'rxjs';
+import { IUser } from '../shared/interfaces';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService {
+export class AuthService implements OnDestroy {
+  private user$$ = new BehaviorSubject<undefined | null | IUser>(undefined);
+  user$ = this.user$$.asObservable();
+
   apiUrl = apiUrl;
   user: IUser | null = null;
+  subscription: Subscription;
 
   get isLoggedIn() {
     return this.user !== null;
   }
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.subscription = this.user$
+      .pipe(filter((val): val is IUser | null => val !== undefined))
+      .subscribe((user) => (this.user = user));
+  }
 
   register(
     username: string,
@@ -30,7 +39,9 @@ export class AuthService {
       rePassword,
       tel,
     };
-    return this.http.post(`${apiUrl}/register`, body);
+    return this.http
+      .post(`${apiUrl}/register`, body)
+      .pipe(tap((user) => this.user$$.next(user as IUser)));
   }
 
   login(email: string, password: string) {
@@ -38,14 +49,24 @@ export class AuthService {
       email,
       password,
     };
-    return this.http.post(`${apiUrl}/login`, body);
+    return this.http
+      .post(`${apiUrl}/login`, body)
+      .pipe(tap((user) => this.user$$.next(user as IUser)));
   }
 
   logout() {
-    return this.http.post(`${apiUrl}/logout`, {});
+    return this.http
+      .post(`${apiUrl}/logout`, {})
+      .pipe(tap(() => this.user$$.next(null)));
   }
 
   getProfile() {
-    return this.http.get<IUser>(`${apiUrl}/users/profile`);
+    return this.http
+      .get<IUser>(`${apiUrl}/users/profile`)
+      .pipe(tap((user) => this.user$$.next(user as IUser)));
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }
