@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { NgForm } from '@angular/forms';
+import { IUser } from 'src/app/shared/interfaces';
 
 @Component({
   selector: 'app-login',
@@ -20,9 +21,16 @@ export class LoginComponent {
     }
 
     const { email, password } = form.value;
-    this.authService.login(email, password).subscribe((user) => {
-      console.log(user);
-      this.router.navigate(['/theme/list']);
+    this.authService.login(email, password).subscribe({
+
+      next: (user) => {
+        this.authService.user = user as IUser;
+        this.router.navigate(['/theme/list']);
+      },
+      error: (err) => {
+        this.authService.user = null;
+        console.error(err);
+      },
     });
   }
 }
