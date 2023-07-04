@@ -41,6 +41,10 @@ export class AuthService {
     return this.http.post(`${apiUrl}/login`, body);
   }
 
+  logout() {
+    return this.http.post(`${apiUrl}/logout`, {});
+  }
+
   getProfile() {
     return this.http.get<IUser>(`${apiUrl}/users/profile`);
   }
