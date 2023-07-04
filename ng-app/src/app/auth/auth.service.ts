@@ -32,4 +32,12 @@ export class AuthService {
     };
     return this.http.post(`${apiUrl}/register`, body);
   }
+
+  login(email: string, password: string) {
+    const body = {
+      email,
+      password,
+    };
+    return this.http.post(`${apiUrl}/login`, body);
+  }
 }
