@@ -5,6 +5,7 @@ import {
   Router,
   RouterStateSnapshot,
 } from '@angular/router';
+import { Observable, map, take } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 
 @Injectable({
@@ -16,26 +17,27 @@ export class AuthActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): boolean {
-    const loginRequired = route.data['loginRequired'];
+  ): boolean | Observable<boolean> {
+    return this.authService.user$.pipe(
+      take(1),
+      map((user) => {
+        const loginRequired = route.data['loginRequired'];
 
-    if (
-      loginRequired === undefined ||
-      this.authService.isLoggedIn === loginRequired
-    ) {
-      return true;
-    }
+        if (loginRequired === undefined || Boolean(user) === loginRequired) {
+          return true;
+        } 
 
-    return this.router.navigate(['/auth/login']) as unknown as false;
-
-    // this.router.navigate(['/auth/login']);
-    // return false;
+        return Boolean(user)
+          ? (this.router.navigate(['/theme/list']) as unknown as false)
+          : (this.router.navigate(['/auth/login']) as unknown as false);
+      })
+    );
   }
 }
 
 export const authGuard: CanActivateFn = (
   route: ActivatedRouteSnapshot,
   state: RouterStateSnapshot
-): boolean => {
+): boolean | Observable<boolean> => {
   return inject(AuthActivate).canActivate(route, state);
 };

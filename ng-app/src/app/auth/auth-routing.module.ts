@@ -13,34 +13,38 @@ const routes: Routes = [
       {
         path: 'login',
         component: LoginComponent,
-        data: { 
+        canActivate: [authGuard],
+        data: {
           title: 'Login Form',
-        }
+          loginRequired: false,
+        },
       },
       {
         path: 'register',
         component: RegisterComponent,
-        data: { 
-          title: 'Register Form'
-        }
+        canActivate: [authGuard],
+        data: {
+          title: 'Register Form',
+          loginRequired: false,
+        },
       },
       {
         path: 'logout',
         component: LogoutComponent,
         canActivate: [authGuard],
-        data: { 
+        data: {
           title: 'Logging Out',
-          loginRequired: true
-        }
+          loginRequired: true,
+        },
       },
       {
         path: 'profile',
         component: ProfileComponent,
         canActivate: [authGuard],
-        data: { 
+        data: {
           title: 'Your Profile',
-          loginRequired: true
-        }
+          loginRequired: true,
+        },
       },
     ],
   },

@@ -9,7 +9,9 @@ import { IUser } from '../shared/interfaces';
 })
 export class AuthService implements OnDestroy {
   private user$$ = new BehaviorSubject<undefined | null | IUser>(undefined);
-  user$ = this.user$$.asObservable();
+  user$ = this.user$$
+    .asObservable()
+    .pipe(filter((val): val is IUser | null => val !== undefined));
 
   apiUrl = apiUrl;
   user: IUser | null = null;
@@ -20,9 +22,7 @@ export class AuthService implements OnDestroy {
   }
 
   constructor(private http: HttpClient) {
-    this.subscription = this.user$
-      .pipe(filter((val): val is IUser | null => val !== undefined))
-      .subscribe((user) => (this.user = user));
+    this.subscription = this.user$.subscribe((user) => (this.user = user));
   }
 
   register(
