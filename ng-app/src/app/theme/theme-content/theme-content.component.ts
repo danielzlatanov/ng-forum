@@ -81,6 +81,7 @@ export class ThemeContentComponent {
     });
   }
 
+
   likeHandler(e: MouseEvent) {
     const postId = (
       (e.target as HTMLButtonElement).parentNode as HTMLDivElement
@@ -96,6 +97,16 @@ export class ThemeContentComponent {
     });
   }
 
+  deleteHandler(postId: string): void {
+    this.apiService.deletePost(this.themeId, postId).subscribe({
+      next: (val) => {
+        this.getTheme();
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+  }
 
   toggleEditMode(post: any) {
     post.editPostMode = !post.editPostMode;

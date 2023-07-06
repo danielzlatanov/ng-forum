@@ -45,4 +45,17 @@ export class ApiService {
   like(postId: string) {
     return this.httpClient.put<IPost>(`${apiUrl}/likes/${postId}`, {});
   }
+
+  deletePost(themeId: string, postId: string) {
+    return this.httpClient.delete<IPost>(
+      `${apiUrl}/themes/${themeId}/posts/${postId}`
+    );
+  }
+
+  editPost(themeId: string, postId: string, postText: string) {
+    return this.httpClient.put<IPost>(
+      `${apiUrl}/themes/${themeId}/posts/${postId}`,
+      { postText }
+    );
+  }
 }

@@ -85,12 +85,14 @@
         <button
           id="editBtn"
           *ngIf="!post.editPostMode"
+          (click)="toggleEditMode(post)"
         >
           Edit
         </button>
         <button
           id="delBtn"
           *ngIf="!post.editPostMode"
+          (click)="deleteHandler(post._id)"
         >
           Delete
         </button>
