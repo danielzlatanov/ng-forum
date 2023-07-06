@@ -30,17 +30,17 @@ export class ProfileComponent {
     this.editMode = !this.editMode;
   }
 
-  saveHandler(form: NgForm){
+  saveHandler(form: NgForm) {
     if (form.invalid) {
       return;
     }
 
     const { username, email, ext, phone } = form.value;
     const body = { username, email, tel: ext + ' ' + phone };
-    this.authService.saveProfile(body)
+    this.authService.saveProfile(body);
     this.editMode = false;
   }
-  
+
   cancelHandler(): void {
     this.editMode = false;
   }
