@@ -15,6 +15,10 @@ export class ThemeContentComponent {
   themePosts: IPost[] | null = null;
   themeId = this.route.snapshot.paramMap.get('id') as string;
 
+  //todo!
+  isOwner = true;
+  editPostMode = false;
+
   get isLoggedIn() {
     return this.authService.isLoggedIn;
   }
@@ -66,12 +70,8 @@ export class ThemeContentComponent {
     });
   }
 
-  subscribeHandler(e: MouseEvent) {
-    const themeId = (
-      (e.target as HTMLButtonElement).parentNode as HTMLDivElement
-    ).id;
-
-    this.apiService.subscribe(themeId).subscribe({
+  subscribeHandler() {
+    this.apiService.subscribe(this.themeId).subscribe({
       next: (val) => {
         this.getTheme();
       },
@@ -94,5 +94,10 @@ export class ThemeContentComponent {
         console.error(err);
       },
     });
+  }
+
+
+  toggleEditMode(post: any) {
+    post.editPostMode = !post.editPostMode;
   }
 }

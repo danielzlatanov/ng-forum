@@ -1,6 +1,5 @@
 <div class="theme-content">
   <app-welcome *ngIf="!isLoggedIn"></app-welcome>
-
   <div class="theme-title">
     <div class="theme-name-wrapper">
       <div class="theme-name">
@@ -18,7 +17,7 @@
 
         <button
           class="subscribe"
-          (click)="subscribeHandler($event)"
+          (click)="subscribeHandler()"
           *ngIf="user && !theme?.subscribers?.includes(user._id)"
         >
           Subscribe
@@ -47,17 +46,55 @@
         <div class="userdetails">
           <img src="/assets/profile.png" alt="avatar" />
         </div>
-        <div class="post-content">
-          <p>{{ post.text }}</p>
-        </div>
+
+        <ng-container *ngIf="post.editPostMode">
+          <form #editForm="ngForm">
+            <input
+              type="text"
+              ngModel="{{ post.text }}"
+              name="post"
+              id="post"
+              #postInput="ngModel"
+              required
+            />
+
+            <ng-container *ngIf="postInput.touched || postInput.dirty">
+              <p class="error" *ngIf="postInput.errors?.['required']">
+                You must provide text for your post!
+              </p>
+            </ng-container>
+            <button id="saveBtn" *ngIf="post.editPostMode">Save</button>
+          </form>
+        </ng-container>
+
+        <ng-container *ngIf="!post.editPostMode">
+          <div class="post-content">
+            <p>{{ post.text }}</p>
+          </div>
+        </ng-container>
       </div>
       <div class="footer" data-id="{{ post._id }}" *ngIf="isLoggedIn">
         <i class="fas fa-thumbs-up" (click)="likeHandler($event)"></i>
-        <i class="fas fa-thumbs-down"></i>
+        <!-- <i class="fas fa-thumbs-down"></i> -->
         <p>
           <span>{{ post.likes.length }}</span> likes
         </p>
       </div>
+
+      <ng-container *ngIf="isOwner">
+        <button
+          id="editBtn"
+          *ngIf="!post.editPostMode"
+        >
+          Edit
+        </button>
+        <button
+          id="delBtn"
+          *ngIf="!post.editPostMode"
+        >
+          Delete
+        </button>
+      </ng-container>
     </div>
   </ng-container>
 

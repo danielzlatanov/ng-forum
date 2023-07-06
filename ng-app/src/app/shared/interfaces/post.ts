@@ -10,4 +10,5 @@ export interface IPost {
   created_at: string;
   updatedAt: string;
   __v: number;
+  editPostMode: boolean;
 }
