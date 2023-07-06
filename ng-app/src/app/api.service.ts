@@ -41,4 +41,8 @@ export class ApiService {
       `${apiUrl}/posts${limit ? `?limit=${limit}` : ``}`
     );
   }
+
+  like(postId: string) {
+    return this.httpClient.put<IPost>(`${apiUrl}/likes/${postId}`, {});
+  }
 }

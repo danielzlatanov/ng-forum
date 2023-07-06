@@ -51,8 +51,8 @@
           <p>{{ post.text }}</p>
         </div>
       </div>
-      <div class="footer" *ngIf="isLoggedIn">
-        <i class="fas fa-thumbs-up"></i>
+      <div class="footer" data-id="{{ post._id }}" *ngIf="isLoggedIn">
+        <i class="fas fa-thumbs-up" (click)="likeHandler($event)"></i>
         <i class="fas fa-thumbs-down"></i>
         <p>
           <span>{{ post.likes.length }}</span> likes

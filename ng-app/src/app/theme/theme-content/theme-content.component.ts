@@ -80,4 +80,19 @@ export class ThemeContentComponent {
       },
     });
   }
+
+  likeHandler(e: MouseEvent) {
+    const postId = (
+      (e.target as HTMLButtonElement).parentNode as HTMLDivElement
+    ).id;
+
+    this.apiService.like(postId).subscribe({
+      next: (val) => {
+        this.getTheme();
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+  }
 }
