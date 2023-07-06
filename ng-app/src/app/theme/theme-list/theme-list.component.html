@@ -1,12 +1,14 @@
-<div *ngIf="errorFetchingData">Error loading themes... <br> Try again later.</div>
-<app-loader *ngIf="(!themeList && !errorFetchingData)"></app-loader>
-
+<div *ngIf="errorFetchingData">
+  Error loading themes... <br />
+  Try again later.
+</div>
+<app-loader *ngIf="!themeList && !errorFetchingData"></app-loader>
 
 <div *ngFor="let theme of themeList" class="theme-container">
   <div class="theme-name-wrapper">
     <div class="theme-name">
-      <a routerLink="/theme/content/{{theme._id}}" class="normal">
-        <h2>{{ theme.themeName }}</h2>
+      <a routerLink="/theme/content/{{ theme._id }}" class="normal">
+        <h2>{{ theme.themeName | shortenTitle : 18 }}</h2>
       </a>
       <div class="columns">
         <div>
