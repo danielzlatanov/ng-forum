@@ -48,7 +48,7 @@
         </div>
 
         <ng-container *ngIf="post.editPostMode">
-          <form #editForm="ngForm">
+          <form #editForm="ngForm" (ngSubmit)="editHandler(post, editForm)">
             <input
               type="text"
               ngModel="{{ post.text }}"

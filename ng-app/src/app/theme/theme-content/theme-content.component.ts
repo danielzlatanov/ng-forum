@@ -81,7 +81,6 @@ export class ThemeContentComponent {
     });
   }
 
-
   likeHandler(e: MouseEvent) {
     const postId = (
       (e.target as HTMLButtonElement).parentNode as HTMLDivElement
@@ -108,7 +107,21 @@ export class ThemeContentComponent {
     });
   }
 
-  toggleEditMode(post: any) {
+  editHandler(post: IPost, form: NgForm): void {
+    const { post: postText } = form.value;
+
+    this.apiService.editPost(this.themeId, post._id, postText).subscribe({
+      next: (val) => {
+        this.getTheme();
+        post.editPostMode = false;
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+  }
+
+  toggleEditMode(post: IPost) {
     post.editPostMode = !post.editPostMode;
   }
 }
