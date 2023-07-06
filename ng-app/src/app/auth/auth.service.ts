@@ -1,7 +1,14 @@
 import { apiUrl } from './../api.service';
 import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Subscription, filter, tap } from 'rxjs';
+import {
+  BehaviorSubject,
+  Subscription,
+  catchError,
+  filter,
+  of,
+  tap,
+} from 'rxjs';
 import { IUser } from '../shared/interfaces';
 
 @Injectable({
@@ -61,9 +68,13 @@ export class AuthService implements OnDestroy {
   }
 
   getProfile() {
-    return this.http
-      .get<IUser>(`${apiUrl}/users/profile`)
-      .pipe(tap((user) => this.user$$.next(user as IUser)));
+    return this.http.get<IUser>(`${apiUrl}/users/profile`).pipe(
+      tap((user) => this.user$$.next(user as IUser)),
+      catchError((err) => {
+        this.user$$.next(null);
+        return of(err);
+      })
+    );
   }
 
   ngOnDestroy(): void {

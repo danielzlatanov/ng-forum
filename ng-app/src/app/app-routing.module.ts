@@ -1,5 +1,10 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {
+  PreloadAllModules,
+  PreloadingStrategy,
+  RouterModule,
+  Routes,
+} from '@angular/router';
 import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
 import { HomeComponent } from './core/home/home.component';
 
@@ -21,13 +26,24 @@ const routes: Routes = [
     },
   },
   {
+    path: 'auth',
+    loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
+  },
+  {
+    path: 'theme',
+    loadChildren: () =>
+      import('./theme/theme.module').then((m) => m.ThemeModule),
+  },
+  {
     path: '**',
     redirectTo: 'page-not-found',
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

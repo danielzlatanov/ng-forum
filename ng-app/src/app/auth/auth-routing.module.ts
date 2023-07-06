@@ -8,45 +8,40 @@ import { authGuard } from '../shared/guards/auth.activate';
 
 const routes: Routes = [
   {
-    path: 'auth',
-    children: [
-      {
-        path: 'login',
-        component: LoginComponent,
-        canActivate: [authGuard],
-        data: {
-          title: 'Login Form',
-          loginRequired: false,
-        },
-      },
-      {
-        path: 'register',
-        component: RegisterComponent,
-        canActivate: [authGuard],
-        data: {
-          title: 'Register Form',
-          loginRequired: false,
-        },
-      },
-      {
-        path: 'logout',
-        component: LogoutComponent,
-        canActivate: [authGuard],
-        data: {
-          title: 'Logging Out',
-          loginRequired: true,
-        },
-      },
-      {
-        path: 'profile',
-        component: ProfileComponent,
-        canActivate: [authGuard],
-        data: {
-          title: 'Your Profile',
-          loginRequired: true,
-        },
-      },
-    ],
+    path: 'login',
+    component: LoginComponent,
+    canActivate: [authGuard],
+    data: {
+      title: 'Login Form',
+      loginRequired: false,
+    },
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    canActivate: [authGuard],
+    data: {
+      title: 'Register Form',
+      loginRequired: false,
+    },
+  },
+  {
+    path: 'logout',
+    component: LogoutComponent,
+    canActivate: [authGuard],
+    data: {
+      title: 'Logging Out',
+      loginRequired: true,
+    },
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
+    canActivate: [authGuard],
+    data: {
+      title: 'Your Profile',
+      loginRequired: true,
+    },
   },
 ];
 

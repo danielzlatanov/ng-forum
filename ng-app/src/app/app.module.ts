@@ -6,8 +6,6 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
-import { ThemeModule } from './theme/theme.module';
-import { AuthModule } from './auth/auth.module';
 import { appInterceptorProvider } from './app.interceptor';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
 
@@ -16,8 +14,6 @@ import { AuthenticateComponent } from './authenticate/authenticate.component';
   providers: [appInterceptorProvider],
   bootstrap: [AppComponent],
   imports: [
-    AuthModule,
-    ThemeModule,
     AppRoutingModule,
     BrowserModule,
     CoreModule,

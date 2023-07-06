@@ -7,32 +7,27 @@ import { authGuard } from '../shared/guards/auth.activate';
 
 const routes: Routes = [
   {
-    path: 'theme',
-    children: [
-      {
-        path: 'list',
-        component: MainComponent,
-        data: {
-          title: 'Theme List',
-        },
-      },
-      {
-        path: 'new',
-        component: NewThemeComponent,
-        canActivate: [authGuard],
-        data: {
-          title: 'Add New Theme',
-          loginRequired: true,
-        },
-      },
-      {
-        path: 'content/:id',
-        component: ThemeContentComponent,
-        data: {
-          title: 'Theme Content',
-        },
-      },
-    ],
+    path: 'list',
+    component: MainComponent,
+    data: {
+      title: 'Theme List',
+    },
+  },
+  {
+    path: 'new',
+    component: NewThemeComponent,
+    canActivate: [authGuard],
+    data: {
+      title: 'Add New Theme',
+      loginRequired: true,
+    },
+  },
+  {
+    path: 'content/:id',
+    component: ThemeContentComponent,
+    data: {
+      title: 'Theme Content',
+    },
   },
 ];
 
