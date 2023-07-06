@@ -48,7 +48,7 @@ export class ThemeContentComponent {
   }
 
   commentHandler(form: NgForm) {
-    if (form.invalid) {
+    if (!this.user || form.invalid) {
       return;
     }
     const { postText } = form.value;
@@ -67,6 +67,9 @@ export class ThemeContentComponent {
   }
 
   subscribeHandler() {
+    if (!this.user) {
+      return;
+    }
     this.apiService.subscribe(this.themeId).subscribe({
       next: (val) => {
         this.getTheme();
@@ -78,6 +81,9 @@ export class ThemeContentComponent {
   }
 
   likeHandler(e: MouseEvent) {
+    if (!this.user) {
+      return;
+    }
     const postId = (
       (e.target as HTMLButtonElement).parentNode as HTMLDivElement
     ).id;
@@ -97,6 +103,9 @@ export class ThemeContentComponent {
   }
 
   deleteHandler(postId: string): void {
+    if (!this.user) {
+      return;
+    }
     this.apiService.deletePost(this.themeId, postId).subscribe({
       next: (val) => {
         this.getTheme();
@@ -108,6 +117,9 @@ export class ThemeContentComponent {
   }
 
   editHandler(post: IPost, form: NgForm): void {
+    if (!this.user) {
+      return;
+    }
     const { post: postText } = form.value;
 
     this.apiService.editPost(this.themeId, post._id, postText).subscribe({
