@@ -15,10 +15,6 @@ export class ThemeContentComponent {
   themePosts: IPost[] | null = null;
   themeId = this.route.snapshot.paramMap.get('id') as string;
 
-  //todo!
-  isOwner = true;
-  editPostMode = false;
-
   get isLoggedIn() {
     return this.authService.isLoggedIn;
   }
@@ -94,6 +90,10 @@ export class ThemeContentComponent {
         console.error(err);
       },
     });
+  }
+
+  isOwner(postOwnerId: string): boolean {
+    return this.user?._id === postOwnerId;
   }
 
   deleteHandler(postId: string): void {

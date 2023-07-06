@@ -81,7 +81,7 @@
         </p>
       </div>
 
-      <ng-container *ngIf="isOwner">
+      <ng-container *ngIf="isOwner(post.userId._id)">
         <button
           id="editBtn"
           *ngIf="!post.editPostMode"
