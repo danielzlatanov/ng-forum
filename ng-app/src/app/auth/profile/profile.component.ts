@@ -3,8 +3,6 @@ import { Component } from '@angular/core';
 import { emailPattern } from 'src/app/shared/constants';
 import { AuthService } from '../auth.service';
 import { NgForm } from '@angular/forms';
-import { apiUrl } from 'src/app/api.service';
-import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-profile',

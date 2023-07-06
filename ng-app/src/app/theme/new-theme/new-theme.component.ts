@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { ApiService } from './../../api.service';
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
@@ -7,14 +9,22 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./new-theme.component.scss'],
 })
 export class NewThemeComponent {
-  constructor() {}
+  constructor(private apiService: ApiService, private router: Router) {}
 
   createTheme(form: NgForm): void {
     if (form.invalid) {
       return;
     }
 
-    console.log('handling create new theme form');
-    console.log(form.value);
+    const { themeName, postText } = form.value;
+
+    this.apiService.createTheme(themeName, postText).subscribe({
+      next: () => {
+        this.router.navigate(['/theme/list']);
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
   }
 }
