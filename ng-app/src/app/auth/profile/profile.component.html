@@ -2,7 +2,7 @@
   <img src="/assets/profile.png" alt="default user" />
   <h3>User Info:</h3>
 
-  <form #profileForm="ngForm" (ngSubmit)="saveProfile(profileForm)">
+  <form #profileForm="ngForm" (ngSubmit)="saveHandler(profileForm)">
     <div class="flex">
       <p>Username:</p>
 
@@ -97,8 +97,8 @@
     </ng-container>
 
     <ng-container *ngIf="editMode">
-      <button class="red-button" (click)="cancelHandler()">Cancel</button>
-      <button class="green-button" [disabled]="profileForm.invalid">
+      <button class="red-button" type="button" (click)="cancelHandler()">Cancel</button>
+      <button class="green-button" type="submit" [disabled]="profileForm.invalid">
         Save
       </button>
     </ng-container>

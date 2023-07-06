@@ -1,7 +1,10 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { emailPattern } from 'src/app/shared/constants';
 import { AuthService } from '../auth.service';
 import { NgForm } from '@angular/forms';
+import { apiUrl } from 'src/app/api.service';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -12,11 +15,11 @@ export class ProfileComponent {
   pattern = emailPattern;
   editMode = false;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private http: HttpClient) {}
 
   get user() {
     const { username, email, tel: phone } = this.authService.user!;
-    const [ext, tel] = phone.split(':');
+    const [ext, tel] = phone.split(' ');
     return {
       username,
       email,
@@ -29,22 +32,18 @@ export class ProfileComponent {
     this.editMode = !this.editMode;
   }
 
-  saveProfile(form: NgForm): void {
+  saveHandler(form: NgForm){
     if (form.invalid) {
       return;
     }
 
     const { username, email, ext, phone } = form.value;
-    this.authService.user = {
-      username,
-      email,
-      tel: ext + ':' + phone,
-    } as any;
-
+    const body = { username, email, tel: ext + ' ' + phone };
+    this.authService.saveProfile(body)
     this.editMode = false;
   }
-
-  cancelHandler() {
+  
+  cancelHandler(): void {
     this.editMode = false;
   }
 }

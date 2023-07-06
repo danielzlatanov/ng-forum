@@ -77,6 +77,21 @@ export class AuthService implements OnDestroy {
     );
   }
 
+  saveProfile(body: Object) {
+    console.log('saving profile');
+    return this.http.put(`${apiUrl}/users/profile`, body).subscribe({
+      next: (user) => {
+        this.user$$.next(user as IUser);
+      },
+      error: (error) => {
+        console.error(error);
+      },
+      complete: () => {
+        console.log('Profile update completed');
+      },
+    });
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
