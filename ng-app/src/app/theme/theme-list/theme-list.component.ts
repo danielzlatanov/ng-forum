@@ -22,6 +22,10 @@ export class ThemeListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.getThemes();
+  }
+
+  getThemes() {
     this.apiService.getThemes().subscribe({
       next: (val) => {
         this.themeList = val;
@@ -37,13 +41,14 @@ export class ThemeListComponent implements OnInit {
     const themeId = (
       (e.target as HTMLButtonElement).parentNode as HTMLDivElement
     ).id;
-    const themeToSubscribe = this.themeList?.find((x) => x._id == themeId);
 
-    if ((e.target as HTMLButtonElement).textContent == ' Subscribe ') {
-      themeToSubscribe?.subscribers.push(this.user?._id as any);
-      (e.target as HTMLButtonElement).textContent = 'Unsubscribe';
-      (e.target as HTMLButtonElement).classList.remove('subscribe');
-      (e.target as HTMLButtonElement).classList.add('unsubscribe');
-    }
+    this.apiService.subscribe(themeId).subscribe({
+      next: (val) => {
+        this.getThemes();
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
   }
 }

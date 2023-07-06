@@ -9,14 +9,27 @@
           Date: <time>{{ theme?.created_at || "N/A" | dateFormat }}</time>
         </p>
       </div>
-      <div class="subscribers">
+
+      <div class="subscribers" data-id="{{ theme?._id }}">
         <p>
           Subscribers: <span>{{ theme?.subscribers?.length }}</span>
         </p>
         <br />
 
-        <button class="subscribe">Subscribe</button>
-        <button class="unsubscribe">Unsubscribe</button>
+        <button
+          class="subscribe"
+          (click)="subscribeHandler($event)"
+          *ngIf="user && !theme?.subscribers?.includes(user._id)"
+        >
+          Subscribe
+        </button>
+
+        <button
+          class="unsubscribe"
+          *ngIf="user && theme?.subscribers?.includes(user._id)"
+        >
+          Unsubscribe
+        </button>
       </div>
     </div>
   </div>

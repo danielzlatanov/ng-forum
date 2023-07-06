@@ -9,7 +9,7 @@
     <h2 class="title">Recent posts</h2>
     <div>
       <div *ngFor="let post of postList" class="aside-theme">
-        <a href="#">
+        <a routerLink="/theme/content/{{ post.themeId._id }}">
           <h3>{{ post.text | shortenTitle : 30 }}</h3>
           <p>{{ post.userId.username }}</p>
           <p>

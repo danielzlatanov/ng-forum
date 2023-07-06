@@ -25,9 +25,16 @@
           <button
             class="subscribe"
             (click)="subscribeHandler($event)"
-            *ngIf="user"
+            *ngIf="user && !theme.subscribers.includes(user._id)"
           >
             Subscribe
+          </button>
+
+          <button
+            class="unsubscribe"
+            *ngIf="user && theme.subscribers.includes(user._id)"
+          >
+            Unsubscribe
           </button>
           <p>
             Subscribers: <span>{{ theme.subscribers.length }}</span>

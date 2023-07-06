@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { IPost, ITheme } from 'src/app/shared/interfaces';
@@ -58,6 +58,21 @@ export class ThemeContentComponent {
         this.themePosts?.push(comment);
         console.log(this.themePosts);
         form.reset();
+        this.getTheme();
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+  }
+
+  subscribeHandler(e: MouseEvent) {
+    const themeId = (
+      (e.target as HTMLButtonElement).parentNode as HTMLDivElement
+    ).id;
+
+    this.apiService.subscribe(themeId).subscribe({
+      next: (val) => {
         this.getTheme();
       },
       error: (err) => {

@@ -25,16 +25,20 @@ export class ApiService {
     return this.httpClient.post<ITheme>(`${apiUrl}/themes`, body);
   }
 
+  postComment(themeId: string, postText: string) {
+    return this.httpClient.post<IPost>(`${apiUrl}/themes/${themeId}`, {
+      postText,
+    });
+  }
+
+  subscribe(themeId: string) {
+    return this.httpClient.put<ITheme>(`${apiUrl}/themes/${themeId}`, {});
+  }
+
   //! Posts
   getPosts(limit?: number) {
     return this.httpClient.get<IPost[]>(
       `${apiUrl}/posts${limit ? `?limit=${limit}` : ``}`
     );
-  }
-
-  postComment(themeId: string, postText: string) {
-    return this.httpClient.post<IPost>(`${apiUrl}/themes/${themeId}`, {
-      postText,
-    });
   }
 }
