@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { IPost, ITheme } from 'src/app/shared/interfaces';
@@ -12,6 +13,7 @@ import { IPost, ITheme } from 'src/app/shared/interfaces';
 export class ThemeContentComponent {
   theme: ITheme | null = null;
   themePosts: IPost[] | null = null;
+  themeId = this.route.snapshot.paramMap.get('id') as string;
 
   get isLoggedIn() {
     return this.authService.isLoggedIn;
@@ -28,10 +30,12 @@ export class ThemeContentComponent {
   ) {}
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id') as string;
+    this.getTheme();
+  }
 
-    if (id) {
-      this.apiService.getThemeById(id).subscribe({
+  getTheme() {
+    if (this.themeId) {
+      this.apiService.getThemeById(this.themeId).subscribe({
         next: (val) => {
           this.theme = val;
           this.themePosts = val.posts as any;
@@ -41,5 +45,24 @@ export class ThemeContentComponent {
         },
       });
     }
+  }
+
+  commentHandler(form: NgForm) {
+    if (form.invalid) {
+      return;
+    }
+    const { postText } = form.value;
+
+    this.apiService.postComment(this.themeId, postText).subscribe({
+      next: (comment) => {
+        this.themePosts?.push(comment);
+        console.log(this.themePosts);
+        form.reset();
+        this.getTheme();
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
   }
 }

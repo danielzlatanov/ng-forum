@@ -53,9 +53,17 @@
       <span>{{ user?.username }}</span> comment:
     </p>
     <div class="answer">
-      <form>
-        <textarea name="postText" id="comment" cols="30" rows="10"></textarea>
-        <button>Post</button>
+      <form #commentForm="ngForm" (ngSubmit)="commentHandler(commentForm)">
+        <textarea
+          name="postText"
+          ngModel
+          #commentInput="ngModel"
+          id="comment"
+          cols="30"
+          rows="10"
+          required
+        ></textarea>
+        <button [disabled]="commentForm.invalid">Post</button>
       </form>
     </div>
   </div>

@@ -31,4 +31,10 @@ export class ApiService {
       `${apiUrl}/posts${limit ? `?limit=${limit}` : ``}`
     );
   }
+
+  postComment(themeId: string, postText: string) {
+    return this.httpClient.post<IPost>(`${apiUrl}/themes/${themeId}`, {
+      postText,
+    });
+  }
 }
